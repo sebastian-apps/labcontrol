@@ -15,7 +15,7 @@ Clone the repository.
 git clone https://github.com/sebastian-apps/labcontrol.git
 ```
 
-Install dependencies. 
+Create the virtual environment.
 
 ```
 cd labcontrol
