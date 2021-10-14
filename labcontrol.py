@@ -7,8 +7,8 @@ Created by Sebastian Sessarego
 
 LabControl is designed to monitor and control your process equipment in a laboratory or plant. 
 Consolidate all your sensor and controller output data and plot the data real-time for monitoring processes. 
-For example, temperature, pressure, mass, voltage, or any other reading from your process equipment can be integrated into LabControl.
-Also, data can be exported for future data analysis.
+Temperature, pressure, mass, voltage, and any other reading from your process equipment can be integrated into LabControl.
+Data can also be exported for future data analysis.
 
 The software is currently set up to read from a pressure transducer and four thermocouples.
 However, the software can be easily modified to suit your needs. 
