@@ -19,6 +19,24 @@ Install dependencies.
 
 ```
 cd labcontrol
+python -m venv labcontrol_env
+```
+
+Activate the virtual environment for OSX.
+
+```
+source labcontrol_env/bin/activate
+```
+
+Activate the virtual environment for Windows.
+
+```
+labcontrol_env\Scripts\activate
+```
+
+Install dependencies. 
+
+```
 pip install -r requirements.txt
 ```
 
@@ -27,3 +45,4 @@ Run LabControl.
 ```
 python labcontrol.py
 ```
+
