@@ -18,6 +18,7 @@ git clone https://github.com/sebastian-apps/labcontrol.git
 Install dependencies. 
 
 ```bash
+cd labcontrol
 pip install -r requirements.txt
 ```
 
