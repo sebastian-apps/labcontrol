@@ -7,10 +7,22 @@ Also, data can be exported for future analysis.
 
 <br />
 
-## Installation
+## Set up and Run
 
 Clone the repository.
 
 ```bash
 git clone https://github.com/sebastian-apps/labcontrol.git
+```
+
+Install dependencies. 
+
+```bash
+pip install -r requirements.txt
+```
+
+Run LabControl.
+
+```bash
+python labcontrol.py
 ```
