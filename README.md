@@ -11,19 +11,19 @@ Also, data can be exported for future analysis.
 
 Clone the repository.
 
-```bash
+```
 git clone https://github.com/sebastian-apps/labcontrol.git
 ```
 
 Install dependencies. 
 
-```bash
+```
 cd labcontrol
 pip install -r requirements.txt
 ```
 
 Run LabControl.
 
-```bash
+```
 python labcontrol.py
 ```
