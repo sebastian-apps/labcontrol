@@ -1,4 +1,4 @@
-# <p style="color:blue;">LabControl</p>
+# LabControl
 
 LabControl is designed to monitor and control your process equipment in a laboratory or plant. 
 Consolidate all your sensor and controller output data and plot the data real-time for monitoring processes. 
