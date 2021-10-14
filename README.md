@@ -7,7 +7,7 @@ Data can also be exported for future analysis.
 
 The software is currently set up to read from a pressure transducer and four thermocouples.
 However, the software can be easily modified to suit your needs. Tkinter is used for the Python GUI. Plotting is performed using matplotlib. 
-The serial and minimalmodbus packages are used for communicating with sensors and controllers. Future versions will include options to write setpoint values to the controller.
+The serial and minimalmodbus packages are used for communicating with sensors and controllers. Future versions will include options to write setpoint values to controllers.
 
 <br />
 
