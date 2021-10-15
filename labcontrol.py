@@ -11,9 +11,7 @@ Temperature, pressure, mass, voltage, and any other reading from your process eq
 Data can also be exported for future data analysis.
 
 The software is currently set up to read from a pressure transducer and four thermocouples.
-However, the software can be easily modified to suit your needs. 
-
-Tkinter is used for the Python GUI. Plotting is performed using matplotlib. 
+However, the software can be easily modified to suit your needs. Tkinter is used for the Python GUI. Plotting is performed using matplotlib. 
 
 Future version will include options to write to the controller.
 """
