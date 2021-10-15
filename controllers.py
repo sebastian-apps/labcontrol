@@ -142,7 +142,7 @@ class Dummy:
 
 """
 ===================================================================
-OMEGA MODBUS RTU CONTROLLER (CS8DPT-Series)
+OMEGA MODBUS RTU CONTROLLER 
 ===================================================================
 Currently set up to return a single parameter reading: Temperature
 """
