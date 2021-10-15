@@ -14,7 +14,6 @@ The software is currently set up to read from a pressure transducer and four the
 However, the software can be easily modified to suit your needs. 
 
 Tkinter is used for the Python GUI. Plotting is performed using matplotlib. 
-The serial and minimalmodbus packages are used for communicating with sensors and controllers.
 
 Future version will include options to write to the controller.
 """
