@@ -4,7 +4,7 @@ import glob
 import serial # install as: pip install pyserial
 import time
 import math
-import minimalmodbus
+
 
 
 
