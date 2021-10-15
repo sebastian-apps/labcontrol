@@ -93,7 +93,7 @@ def set_plot(self, data):
         # # Set axis ranges with some padding
         self.axis1.set_xlim([x_min, x_max*1.05])
         self.axis1.set_ylim([y_min*0.95, y_max*1.05])
-        self.axis2.set_ylim([y2_min, y2_max*1.05]) # Second y-axis
+        self.axis2.set_ylim([y2_min*0.95, y2_max*1.05]) # Second y-axis
         self.canvas.draw()
     except Exception as e:
         print("Exception in set_plot().", e)
