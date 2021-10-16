@@ -58,7 +58,6 @@ class Window(Frame):
 
         # Start the controller
         # The Dummy controller is used for testing purposes.
-        # For additional controllers, see controllers.py
         self.controller = controllers.Dummy(com_port=com_port, baudrate=9600, timeout=2)
 
         # Initialize 
