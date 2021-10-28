@@ -68,6 +68,7 @@ class Window(Frame):
                     3: "t3",
                     4: "t4"
         }
+        # Colors associated with each parameter
         self.legend = {
                     "p1": "#0000ff",
                     "t1": "#ff0000",
