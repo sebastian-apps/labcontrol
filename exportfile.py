@@ -2,26 +2,26 @@ from tkinter import filedialog
 
 
 
-def saveas(self):
+def saveas(ctx):
     """ Save the data """
     # there's still a permission error for overwriting files if the csv file is open in excel.
     directory = filedialog.asksaveasfilename(defaultextension="csv", filetypes=[("CSV file", ".csv")])
     # directory is directory + filename.csv
     if directory is not None and directory != "": # None indicates cancelled by user
-        saveCSV(self, directory)
+        saveCSV(ctx, directory)
 
 
 
-def save(self):
+def save(ctx):
     """ Save the data """
-    if self.filesaved == "":  # If data had not previously been saved, go to saveas.
-        self.saveas()
+    if ctx.filesaved == "":  # If data had not previously been saved, go to saveas.
+        ctx.saveas()
     else:
-        saveCSV(self, self.filesaved)
+        saveCSV(ctx, ctx.filesaved)
 
 
 
-def saveCSV(self, directory):
+def saveCSV(ctx, directory):
     """ Save the data as CSV """
     try:
         print("directory:", directory)
@@ -35,8 +35,8 @@ def saveCSV(self, directory):
         # FORMAT DATA, READY FOR PRINTING TO CSV
         # Need to write out data row by row, all keys simultaneously.
         # Create 2D array: each column is (left to right): time, p1, t1, t2, t3, t4
-        num_rows = len(self.plotdata.get("time")) # time was selected arbitrarily
-        table = [[str(val_list[i]) for key, val_list in self.plotdata.items()] for i in range(num_rows)]
+        num_rows = len(ctx.plotdata.get("time")) # time was selected arbitrarily
+        table = [[str(val_list[i]) for key, val_list in ctx.plotdata.items()] for i in range(num_rows)]
         # Remove all 'nan' strings, replace with empty string ''
         table = [["-" if val == "nan" else val for val in row] for row in table]
 
@@ -55,8 +55,8 @@ def saveCSV(self, directory):
             file.write(f"{datastring}\n")  
         file.close()
         print(f"File {directory} saved.")
-        self.filesaved = directory
-        self.show_message("File saved.")
+        ctx.filesaved = directory
+        ctx.show_message("File saved.")
 
     except:
-        self.show_message("Error in saving!")
+        ctx.show_message("Error in saving!")
