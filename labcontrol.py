@@ -21,6 +21,8 @@ import tkinter as tk
 import datetime
 import matplotlib
 matplotlib.use("TkAgg")
+from copy import deepcopy
+import json
 
 # LabControl modules
 import widgets
@@ -38,17 +40,6 @@ class Window(Frame):
     This constitutes the main window that plots all readings over time.
     """
 
-    def init_plotdata(self): 
-        return {
-            "time": [],
-            "p1": [],
-            "t1": [],
-            "t2": [],
-            "t3": [],
-            "t4": [],
-        }
-
-
     def __init__(self, master=None, com_port=None):
         # Init the Tkinter Window
         Frame.__init__(self, master)
@@ -60,24 +51,16 @@ class Window(Frame):
         # The Dummy controller is used for testing purposes.
         self.controller = controllers.Dummy(com_port=com_port, baudrate=9600, timeout=2)
 
+        with open('config.json') as json_file:
+            self.config = json.load(json_file)
+
         # Initialize 
-        self.params = {
-                    0: "p1",
-                    1: "t1",
-                    2: "t2",
-                    3: "t3",
-                    4: "t4"
-        }
-        # Colors associated with each parameter
-        self.legend = {
-                    "p1": "#0000ff",
-                    "t1": "#ff0000",
-                    "t2": "#ff6200",
-                    "t3": "#8b4513",
-                    "t4": "#000"
-                }
-        self.params_num = len(self.params) # Number of params to be plotted against x-axis (time) and will also have a checkbox.
-        self.plotdata = self.init_plotdata()
+        # init_data is used for resetting stored data
+        self.init_data = {param: [] for param in self.config.get("params")} 
+        self.init_data.update({ "time": []})   
+        self.plotdata = deepcopy(self.init_data)
+
+        self.legend = {param: obj.get("color") for param, obj in self.config.get("params").items()}
         self.filesaved = ""
         self.start_time = datetime.datetime.now()
         self.time = 0
@@ -131,7 +114,7 @@ class Window(Frame):
 
     def reset(self):
         """ Reset. Clear the plot. Previous values will be lost. """
-        self.plotdata = self.init_plotdata()
+        self.plotdata = deepcopy(self.init_data)
         self.time = 0
         self.start_time = datetime.datetime.now()
         chart.update_plot(self)

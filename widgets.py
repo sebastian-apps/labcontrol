@@ -57,24 +57,36 @@ def output_reading(label, reading):
 
 def build_checkboxes(ctx):
     CHECK_RELX = LABEL_RELX - 0.10
-    # Checkbox variables, controller needs access 
-    ctx.checkboxes_checked = [IntVar() for _ in range(ctx.params_num)]
     # Create checkboxes here.
-    ctx.checkboxes = [i for i in range(ctx.params_num)]
-    create_checkbox(ctx, num=0, relx=CHECK_RELX, rely=0.25, bgcolor=ctx.legend.get("p1"))
-    create_checkbox(ctx, num=1, relx=CHECK_RELX, rely=0.4, bgcolor=ctx.legend.get("t1"))
-    create_checkbox(ctx, num=2, relx=CHECK_RELX, rely=0.55, bgcolor=ctx.legend.get("t2"))
-    create_checkbox(ctx, num=3, relx=CHECK_RELX, rely=0.7, bgcolor=ctx.legend.get("t3"))
-    create_checkbox(ctx, num=4, relx=CHECK_RELX, rely=0.85, bgcolor=ctx.legend.get("t4"))
+    ctx.checkboxes= {
+        "p1": None,
+        "t1": None,
+        "t2": None,
+        "t3": None,
+        "t4": None,
+        }
+    # Checkbox variables, controller needs access 
+    ctx.checkboxes_checked = {
+        "p1": IntVar(),
+        "t1": IntVar(),
+        "t2": IntVar(),
+        "t3": IntVar(),
+        "t4": IntVar(),
+        }
+    create_checkbox(ctx, name="p1", relx=CHECK_RELX, rely=0.25, bgcolor=ctx.legend.get("p1"))
+    create_checkbox(ctx, name="t1", relx=CHECK_RELX, rely=0.4, bgcolor=ctx.legend.get("t1"))
+    create_checkbox(ctx, name="t2", relx=CHECK_RELX, rely=0.55, bgcolor=ctx.legend.get("t2"))
+    create_checkbox(ctx, name="t3", relx=CHECK_RELX, rely=0.7, bgcolor=ctx.legend.get("t3"))
+    create_checkbox(ctx, name="t4", relx=CHECK_RELX, rely=0.85, bgcolor=ctx.legend.get("t4"))
 
 
 
-def create_checkbox(ctx, num, relx, rely, bgcolor):
-    ctx.checkboxes[num] = Checkbutton(ctx, command=lambda cb_num=num: check_status(ctx, cb_num, bgcolor), variable=ctx.checkboxes_checked[num])
-    ctx.checkboxes[num]['background'] = bgcolor
-    ctx.checkboxes[num].config()
-    ctx.checkboxes[num].select()
-    ctx.checkboxes[num].place(relx=relx, rely=rely, anchor=E) 
+def create_checkbox(ctx, name, relx, rely, bgcolor):
+    ctx.checkboxes[name] = Checkbutton(ctx, command=lambda cb_num=name: check_status(ctx, cb_num, bgcolor), variable=ctx.checkboxes_checked[name])
+    ctx.checkboxes[name]['background'] = bgcolor
+    ctx.checkboxes[name].config()
+    ctx.checkboxes[name].select()
+    ctx.checkboxes[name].place(relx=relx, rely=rely, anchor=E) 
 
 
 def check_status(ctx, cb_num, bgcolor):

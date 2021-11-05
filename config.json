@@ -1,0 +1,30 @@
+{
+    "params": {
+        "p1": {
+            "color": "#0000ff",
+            "axis": "y2"
+        },
+        "t1": {
+            "color": "#ff0000",
+            "axis": "y1"
+        },
+        "t2": {
+            "color": "#ff6200",
+            "axis": "y1"
+        },
+        "t3": {
+            "color": "#8b4513",
+            "axis": "y1"
+        },
+        "t4": {
+            "color": "#000",
+            "axis": "y1"
+        }
+    },
+    "axes_labels": {
+        "x": "Time (s)",
+        "y1": "Temperature (\u00B0C)",
+        "y2": "Pressure (psig)"
+    }
+}
+
