@@ -50,11 +50,12 @@ def start_plot(ctx, data):
                                                 linewidth=1, 
                                                 alpha=0.7)
 
-    # Axes labels
-    ctx.axis1.set_xlabel(ctx.config.get("axes_labels").get("x"))
-    ctx.axis1.set_ylabel(ctx.config.get("axes_labels").get("y1"))
-    ctx.axis2.tick_params(axis='y', labelcolor='b')
-    ctx.axis2.set_ylabel(ctx.config.get("axes_labels").get("y2"), color='b')  # we already handled the x-label with ax1
+    # Set axes labels and colors
+    axes = ctx.config.get("axes")
+    ctx.axis1.set_xlabel(axes.get("x").get("label"), color=axes.get("x").get("color"))
+    ctx.axis1.set_ylabel(axes.get("y1").get("label"), color=axes.get("y1").get("color"))
+    ctx.axis2.tick_params(axis='y', labelcolor=axes.get("y2").get("color"))
+    ctx.axis2.set_ylabel(axes.get("y2").get("label"), color=axes.get("y2").get("color"))  # we already handled the x-label with ax1
 
 
 

@@ -26,10 +26,19 @@
             "axis": "y1"
         }
     },
-    "axes_labels": {
-        "x": "Time (s)",
-        "y1": "Temperature (\u00B0C)",
-        "y2": "Pressure (psig)"
+    "axes": {
+        "x": {
+            "label": "Time (s)",
+            "color": "#000"
+        },
+        "y1": {
+            "label": "Temperature (\u00B0C)",
+            "color": "#000"
+        },
+        "y2": {
+            "label": "Pressure (psig)",
+            "color": "#0000ff"
+        }
     },
     "export_order": [
         "p1", "t1", "t2", "t3", "t4"
