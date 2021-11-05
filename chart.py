@@ -55,7 +55,7 @@ def start_plot(ctx, data):
     ctx.axis1.set_xlabel(axes.get("x").get("label"), color=axes.get("x").get("color"))
     ctx.axis1.set_ylabel(axes.get("y1").get("label"), color=axes.get("y1").get("color"))
     ctx.axis2.tick_params(axis='y', labelcolor=axes.get("y2").get("color"))
-    ctx.axis2.set_ylabel(axes.get("y2").get("label"), color=axes.get("y2").get("color"))  # we already handled the x-label with ax1
+    ctx.axis2.set_ylabel(axes.get("y2").get("label"), color=axes.get("y2").get("color"))  # we already handled the x-label for y2 with axis1
 
 
 
@@ -79,30 +79,19 @@ def set_plot(ctx, data):
 
         # Get axis min/max values
         x_min, x_max = get_minmax(data.get("time"))
-        
-        try:
-            # for all curves plotted on y1-axis. Find the minimum of all minima, and maximum of all maxima.
-            y_min = clean_axis_minmax(min([min(val_list) for key,val_list in data.items() if key in visible_y1]))
-            y_max = clean_axis_minmax(max([max(val_list) for key,val_list in data.items() if key in visible_y1])) 
-        except:
-            y_min, y_max = 0,0
-
-        try:
-            # for all curves plotted on y2-axis. Find the minimum of all minima, and maximum of all maxima.
-            y2_min = clean_axis_minmax(min([min(val_list) for key,val_list in data.items() if key in visible_y2]))
-            y2_max = clean_axis_minmax(max([max(val_list) for key,val_list in data.items() if key in visible_y2])) 
-        except:
-            y2_min, y2_max = 0,0
-
-        # y2_min, y2_max = get_minmax(data.get("p1")) # Second y-axis
+        y1_min, y1_max = get_ultimate_minmax(data, visible_y1)
+        y2_min, y2_max = get_ultimate_minmax(data, visible_y2)
 
         # # Set axis ranges with some padding
         ctx.axis1.set_xlim([x_min, x_max*1.05])
-        ctx.axis1.set_ylim([y_min*0.95, y_max*1.05])
+        ctx.axis1.set_ylim([y1_min*0.95, y1_max*1.05])
         ctx.axis2.set_ylim([y2_min*0.95, y2_max*1.05]) # Second y-axis
         ctx.canvas.draw()
     except Exception as e:
         print("Exception in set_plot().", e)
+
+
+
 
 
 
@@ -112,6 +101,19 @@ def get_minmax(datalist):
     Exception thrown when np.nan is only element in the list. In this case, return 0,0.
     """
     return clean_axis_minmax(min(datalist)), clean_axis_minmax(max(datalist))
+
+
+
+def get_ultimate_minmax(data, visible):
+    # for all curves plotted on y-axis. Find the minimum of all minima, and maximum of all maxima.
+    try:  
+        y_min = clean_axis_minmax(min([min(val_list) for key,val_list in data.items() if key in visible]))
+        y_max = clean_axis_minmax(max([max(val_list) for key,val_list in data.items() if key in visible])) 
+    except:
+        y_min, y_max = 0,0   
+    return y_min, y_max
+
+
 
 def clean_axis_minmax(val):
     """ Axis min/max cannot be None or np.NaN. Change these to 0. """ 
