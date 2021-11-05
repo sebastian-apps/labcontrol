@@ -24,22 +24,24 @@ def save(ctx):
 def saveCSV(ctx, directory):
     """ Save the data as CSV """
     try:
-        print("directory:", directory)
         file  = open(directory, "w")
         # write header row
-        headers = ["Time (s)", "Pressure (psig)", "Temperature 1 (\u00B0C)", "Temperature 2 (\u00B0C)", "Temperature 3 (\u00B0C)", "Temperature 4 (\u00B0C)"]
+        param_order = ctx.config.get("export_order").copy()
+        headers = [ctx.config.get("params").get(param).get("name") for param in param_order]
+        headers.insert(0, "Time (s)")
         datastring = ", ".join(headers)
         # write to CSV
         file.write(f"{datastring}\n")  
 
         # FORMAT DATA, READY FOR PRINTING TO CSV
         # Need to write out data row by row, all keys simultaneously.
-        # Create 2D array: each column is (left to right): time, p1, t1, t2, t3, t4
-        num_rows = len(ctx.plotdata.get("time")) # time was selected arbitrarily
-        table = [[str(val_list[i]) for key, val_list in ctx.plotdata.items()] for i in range(num_rows)]
-        # Remove all 'nan' strings, replace with empty string ''
-        table = [["-" if val == "nan" else val for val in row] for row in table]
+        # Create 2D array (list of lists): each column (left to right) is dictacted by config.get("export_order")
+        param_order.insert(0, "time")
+        num_rows = len(ctx.plotdata.get("time")) # time was selected arbitrarily to get num_rows.
+        table = [[str(ctx.plotdata.get(param)[i]) for param in param_order] for i in range(num_rows)]
 
+        # Remove all 'nan' strings, replace with empty with arbitrary string value
+        table = [["-" if val == "nan" else val for val in row] for row in table]
         # Remove rows with duplicate time values. Keep the most recent of the duplicates.
         table2 = []
         prev_time_value = None
@@ -58,5 +60,8 @@ def saveCSV(ctx, directory):
         ctx.filesaved = directory
         ctx.show_message("File saved.")
 
-    except:
+
+    except PermissionError:
+        ctx.show_message("Error in saving!\nFile is open.\nPlease close file before saving.")
+    except Exception as e:
         ctx.show_message("Error in saving!")

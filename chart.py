@@ -15,7 +15,7 @@ def setup(ctx):
     ctx.axis2 = ctx.axis1.twinx()  # create a second y-axis
     # ctx.axis1.set_xlim([0, 200]);
     # ctx.axis1.set_ylim([0, 200]);
-    ax_plot(ctx, ctx.plotdata)
+    start_plot(ctx, ctx.plotdata)
     ctx.canvas = FigureCanvasTkAgg(ctx.f, ctx)
     ctx.canvas.get_tk_widget().pack(anchor='w', fill=BOTH, expand=YES)
     ctx.canvas.get_tk_widget().place(x=5, y=25)
@@ -26,7 +26,7 @@ def setup(ctx):
 
 
 
-def ax_plot(ctx, data):
+def start_plot(ctx, data):
     """ 
     Plot the axes and values. This method is called when first creating the plot.
     For plot updates, call set_plot(...)
@@ -42,7 +42,7 @@ def ax_plot(ctx, data):
                                                 color=ctx.legend.get(param_name), 
                                                 linewidth=1, 
                                                 alpha=0.7)
-            else: # secondary y-axis
+            elif specs.get("axis") == "y2":   # secondary y-axis  
                 ctx.curves[param_name], = ctx.axis2.plot(
                                                 data.get("time"),
                                                 data.get(param_name), 
@@ -120,7 +120,7 @@ def clean_axis_minmax(val):
 def update_plot(ctx):
     ctx.axis1.cla()
     ctx.axis2.cla()
-    ax_plot(ctx, ctx.plotdata)   
+    start_plot(ctx, ctx.plotdata)   
     ctx.canvas.draw() #ctx.update()
 
 
