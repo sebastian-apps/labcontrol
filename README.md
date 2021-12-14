@@ -24,6 +24,8 @@ Create the virtual environment.
 
 ```
 cd labcontrol
+```
+```
 python -m venv labcontrol_env
 ```
 
