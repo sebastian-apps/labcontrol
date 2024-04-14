@@ -29,7 +29,7 @@ cd labcontrol
 python -m venv labcontrol_env
 ```
 
-Activate the virtual environment for OSX.
+Activate the virtual environment for Mac.
 
 ```
 source labcontrol_env/bin/activate
